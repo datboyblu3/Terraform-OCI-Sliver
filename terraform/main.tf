@@ -80,6 +80,58 @@ resource "oci_core_security_list" "security_lab_fw" {
     description = "Allow HTTPS traffic"
   }
 
+   ingress_security_rules{
+    protocol = "6" # TCP
+    source   = "0.0.0.0/0"
+    tcp_options {
+      min = 8888
+      max = 8888
+    }
+    description = "Allow mTLS traffic"
+  }
+
+  ingress_security_rules{
+    protocol = "6" # TCP
+    source   = "0.0.0.0/0"
+    tcp_options {
+      min = 53
+      max = 53
+    }
+    description = "Allow DNS traffic"
+  }
+
+    ingress_security_rules{
+    protocol = "17" # UDP
+    source   = "0.0.0.0/0"
+    udp_options {
+      min = 53
+      max = 53
+    }
+    description = "Allow inbound DNS traffic"
+  }
+
+  ingress_security_rules{
+    protocol = "6" # TCP
+    source   = "0.0.0.0/0"
+    udp_options {
+      min = 4444
+      max = 4444
+    }
+    description = "Reverse and/or Bind shell to C2"
+  }
+
+  #Allow outbound connections for sliver beacon callbacks
+
+  egress_security_rules{
+    protocol = "17" # UDP
+    source   = "0.0.0.0/0"
+    udp_options {
+      min = 53
+      max = 53
+    }
+    description = "Allow outbound DNS traffic"
+  }
+
 }
 
 resource "oci_core_instance" "security_lab_instance" {
@@ -117,11 +169,10 @@ resource "oci_core_instance" "security_lab_instance" {
 
  provisioner "local-exec" {
     working_dir = var.dir
-    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i '${self.public_ip},'  -u opc --private-key '~/.ssh/oci_key' -e '~/.ssh/oci_key.pub' deploy_agent.yml -vvv"
+    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i '${self.public_ip},'  -u opc --private-key '~/.ssh/oci_key' -e '~/.ssh/oci_key.pub' ansible/sliver_beacon.yml -vvv"
   }
 
 }
-
 
 data "oci_identity_availability_domains" "security_lab_ad" {
   compartment_id = var.tenancy_ocid
