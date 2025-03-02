@@ -15,7 +15,7 @@ resource "oci_core_route_table" "security_lab_route_table" {
   compartment_id = var.compartment
 
   route_rules {
-    destination        = var.route_table_cidr
+    destination       = var.route_table_cidr
     network_entity_id = oci_core_internet_gateway.security_lab_igw.id
   }
 }
@@ -60,7 +60,7 @@ resource "oci_core_security_list" "security_lab_fw" {
     description = "Allow SSH traffic"
   }
 
-  ingress_security_rules{
+  ingress_security_rules {
     protocol = "6" # TCP
     source   = "0.0.0.0/0"
     tcp_options {
@@ -70,7 +70,7 @@ resource "oci_core_security_list" "security_lab_fw" {
     description = "Allow HTTP traffic"
   }
 
-  ingress_security_rules{
+  ingress_security_rules {
     protocol = "6" # TCP
     source   = "0.0.0.0/0"
     tcp_options {
@@ -80,7 +80,7 @@ resource "oci_core_security_list" "security_lab_fw" {
     description = "Allow HTTPS traffic"
   }
 
-   ingress_security_rules{
+  ingress_security_rules {
     protocol = "6" # TCP
     source   = "0.0.0.0/0"
     tcp_options {
@@ -90,17 +90,7 @@ resource "oci_core_security_list" "security_lab_fw" {
     description = "Allow mTLS traffic"
   }
 
-  ingress_security_rules{
-    protocol = "6" # TCP
-    source   = "0.0.0.0/0"
-    tcp_options {
-      min = 53
-      max = 53
-    }
-    description = "Allow DNS traffic"
-  }
-
-    ingress_security_rules{
+  ingress_security_rules {
     protocol = "17" # UDP
     source   = "0.0.0.0/0"
     udp_options {
@@ -110,7 +100,7 @@ resource "oci_core_security_list" "security_lab_fw" {
     description = "Allow inbound DNS traffic"
   }
 
-  ingress_security_rules{
+  ingress_security_rules {
     protocol = "6" # TCP
     source   = "0.0.0.0/0"
     udp_options {
@@ -122,14 +112,16 @@ resource "oci_core_security_list" "security_lab_fw" {
 
   #Allow outbound connections for sliver beacon callbacks
 
-  egress_security_rules{
-    protocol = "17" # UDP
-    source   = "0.0.0.0/0"
-    udp_options {
-      min = 53
-      max = 53
-    }
-    description = "Allow outbound DNS traffic"
+  egress_security_rules {
+    protocol    = "17" # UDP
+    destination = "0.0.0.0/0"
+    description = "Allow outbound UDP traffic"
+  }
+
+  egress_security_rules {
+    protocol    = "6" # TCP
+    destination = "0.0.0.0/0"
+    description = "Allow outbound TCP traffic"
   }
 
 }
@@ -156,8 +148,8 @@ resource "oci_core_instance" "security_lab_instance" {
 
   provisioner "remote-exec" {
     inline = [
-                "sudo yum install python39 -y"
-             ]
+      "sudo yum install python39 -y"
+    ]
 
     connection {
       host        = self.public_ip
@@ -167,9 +159,9 @@ resource "oci_core_instance" "security_lab_instance" {
     }
   }
 
- provisioner "local-exec" {
+  provisioner "local-exec" {
     working_dir = var.dir
-    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i '${self.public_ip},'  -u opc --private-key '~/.ssh/oci_key' -e '~/.ssh/oci_key.pub' ansible/sliver_beacon.yml -vvv"
+    command     = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i '${self.public_ip},'  -u opc --private-key '~/.ssh/oci_key' -e '~/.ssh/oci_key.pub' sliver_beacon.yml -vvv"
   }
 
 }
