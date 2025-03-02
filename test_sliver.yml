@@ -1,0 +1,36 @@
+- name: Download Sliver client
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Create directory "sliver"
+      ansible.builtin.file:
+        path: "/home/opc/sliver"
+        state: directory
+        mode: "0777"
+
+    - name: Download Sliver client using curl (with retries)
+      ansible.builtin.shell: |
+        curl -L --fail --retry 3 -o /home/opc/sliver/sliver-client \
+        https://github.com/BishopFox/sliver/releases/download/v1.5.39/sliver-client_linux
+      register: download_result
+      retries: 3
+      delay: 5
+      until: download_result.rc == 0
+      changed_when: download_result.rc == 0
+
+    - name: Verify Sliver client download
+      ansible.builtin.stat:
+        path: "/home/opc/sliver/sliver-client"
+      register: sliver_file
+
+    - name: Ensure Sliver client was downloaded successfully
+      ansible.builtin.fail:
+        msg: "Failed to download Sliver client!"
+      when: not sliver_file.stat.exists or sliver_file.stat.size < 100000 # Ensure file is not empty
+
+    - name: Make Sliver client executable
+      ansible.builtin.file:
+        path: "/home/opc/sliver/sliver-client"
+        mode: "0755"
+        owner: root
+        group: root
