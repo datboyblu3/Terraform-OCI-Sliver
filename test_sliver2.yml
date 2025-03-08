@@ -10,7 +10,7 @@
     beacon_name: "NIKES_ON_MY_FEET_KEEP_MY_CIPHER_COMPLETE"
 
   tasks:
-    - name: Create directory /tmp/test
+    - name: Create directory /Users/dan/test
       ansible.builtin.file:
         path: "/Users/dan/test"
         owner: dan
