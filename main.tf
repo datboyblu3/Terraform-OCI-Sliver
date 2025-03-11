@@ -104,8 +104,8 @@ resource "oci_core_security_list" "security_lab_fw" {
     protocol = "6" # TCP
     source   = "0.0.0.0/0"
     udp_options {
-      min = 4444
-      max = 4444
+      min = 5555
+      max = 5555
     }
     description = "Reverse and/or Bind shell to C2"
   }
@@ -123,6 +123,7 @@ resource "oci_core_security_list" "security_lab_fw" {
     destination = "0.0.0.0/0"
     description = "Allow outbound TCP traffic"
   }
+  
 
 }
 
