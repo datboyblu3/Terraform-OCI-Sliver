@@ -87,7 +87,6 @@ ansible-playbook get_stager.yml --ask-become-pass
 ```
 
 
-
 ## SliverC2 Commands
 
 Tutorial Series: **[Sliver.sh](https://sliver.sh/)**
