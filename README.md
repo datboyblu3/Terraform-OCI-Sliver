@@ -11,62 +11,48 @@ The goal of this PoC is to provide red teams and penetration testers with an aut
 - **Operational efficiency**, reducing the manual effort required to set up C2 infrastructure.
 - **CI/CD pipeline compromise**, enabling deeper attacks within trusted environments.
 
-## Key Components
-1. **Terraform**
-   - Deploys multiple OCI compute instances.
-   - Automates network configurations and provisioning.
-   - Ensures infrastructure consistency and repeatability.
+## OCI Shapes Overview
 
-2. **Ansible**
-   - Remotely executes post-provisioning tasks on OCI instances.
-   - Downloads and executes Sliver beacons on target hosts.
-   - Enables modular and scalable attack automation.
+If you have purview into the workspace, build your beach head based off the image(s) used in the OCI environment
+| Shape       | OCPU        | Local Disk    |
+| :---        |    :----:   |          ---: |
+| Header      | Title       | Here's this   |
+| Paragraph   | Text        | And more      |
 
-3. **Sliver C2**
-   - An open-source adversary simulation and C2 framework.
-   - Used for deploying and managing beacons on compromised systems.
-   - Enables real-world attack emulation for cybersecurity assessments.
+## Requirements
+- [OCI Account](https://signup.oraclecloud.com/)
+- [Install Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+- [Install Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
+- Generate SSH keypair to access the OCI compute instances and resources:
+```go
+ssh-keygen -t RSA -b 4096 -f ~/.ssh/oci_key
+```
 
-4. **CI/CD Pipeline Compromise**
-   - Provisioned machines allow attackers to access and manipulate the CI/CD pipeline.
-   - Enables tampering with deployment workflows to introduce malicious artifacts.
-   - Facilitates persistence by leveraging trusted infrastructure for further compromise.
+## Deployment Instructions
 
-## Attack Chain
-1. **Initial Deployment**
-   - Terraform provisions OCI instances.
-   - Ansible executes Sliver beacons, establishing C2 communication.
+1. Clone the repository and change into the directory
 
-2. **CI/CD Pipeline Access**
-   - Exploitation of misconfigured or exposed credentials.
-   - Lateral movement within the pipeline environment.
+```go
+https://github.com/datboyblu3/Terraform-OCI-Sliver
+cd 
+```
 
-3. **Workflow Manipulation**
-   - Injecting malicious code or artifacts into trusted deployment processes.
-   - Establishing persistence through legitimate build systems.
+2. Initialize Terraform to configure the OCI provider
+```go
+terraform init
+```
 
-4. **Infrastructure Expansion**
-   - Deploying additional machines within the trusted environment.
-   - Scaling attack operations without triggering traditional alerts.
+3. Create the Terraform deployment. This will display what changes will be made
+```go
+terraform plan
+```
 
-## Benefits
-- **Time-efficient**: Reduces setup time for red team engagements.
-- **Cloud-native**: Leverages OCI’s infrastructure for cost-effective, scalable operations.
-- **Automated adversary emulation**: Enhances penetration testing realism.
-- **Flexible and customizable**: Easily integrates with other attack frameworks.
-- **Trusted Execution**: Exploits the inherent trust of CI/CD pipelines to deploy malicious workloads undetected.
+4. Apply the plan to deploy your OCI infrastructure
+```go
+terraform apply --auto-approve
+````
 
-## Usage Considerations
-- This PoC is strictly for ethical red teaming and penetration testing within authorized environments.
-- Ensure compliance with organizational and legal guidelines before deployment.
-- Follow cloud provider terms of service regarding offensive security testing.
-
-## Future Enhancements
-- Integrate additional evasion techniques to improve stealth.
-- Expand cloud provider support (AWS, Azure, GCP).
-- Automate teardown procedures for quick cleanup.
-- Enhance CI/CD attack techniques with advanced persistence mechanisms.
-
+## Ansible 
 ---
 **Disclaimer:** This project is for educational and research purposes only. Unauthorized use in production or external environments is strictly prohibited.
 
