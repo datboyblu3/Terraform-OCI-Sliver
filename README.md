@@ -49,7 +49,7 @@ ssh-keygen -t RSA -b 4096 -f ~/.ssh/oci_key
 
 ```go
 https://github.com/datboyblu3/Terraform-OCI-Sliver
-cd 
+cd Terraform-OCI-Sliver
 ```
 
 2. Initialize Terraform to configure the OCI provider
@@ -65,11 +65,32 @@ terraform plan
 4. Apply the plan to deploy your OCI infrastructure
 ```go
 terraform apply --auto-approve
-````
+```
+
+### Default Login
+
+Once the OCI instance has been fully deployed and provisioned, attempt to SSH into it with the default username: `opc`, like so:
+```go
+ssh -i ~/.ssh/oci_key opc@COMPUTE_INSTANCE_IP
+```
 
 ## Ansible 
 
+*Hint:* Install [`prettier`](https://prettier.io/) to auto format your Ansible playbooks. This will ensure your playbooks are syntatically correct and save you a TON of headaches!
+
+DigitalOcean has a thorough Ansible tutorial series that with some helpful commands that can assist you in trouble shooting, configuration management etc:  [How To Manage Remote Servers with Ansible](https://www.digitalocean.com/community/tutorial-series/how-to-manage-remote-servers-with-ansible)
+
+
+Test Ansible playbook
+```go
+ansible-playbook get_stager.yml --ask-become-pass
+```
+
+
+
 ## SliverC2 Commands
+
+Tutorial Series: **[Sliver.sh](https://sliver.sh/)**
 
 Sliver C2 is an open-source command and control (C2) framework developed by BishopFox. It is designed for adversary emulation, red teaming, and penetration testing. Sliver provides features similar to other C2 frameworks like Cobalt Strike and Metasploit, but it is particularly popular for its flexibility, modularity, and support for multiple operating systems.
 
@@ -82,6 +103,19 @@ Sliver C2 is an open-source command and control (C2) framework developed by Bish
 - **Extensibility:** Can be customized with Golang for additional functionalities.
 
 
+
+
+## Troubleshooting Tips
+
+### Troubleshooting Terraform
+
+### Troubleshooting Ansible
+
+### Troubleshooting OCI
+
+### Troubleshooting Sliver
+
+
+
 ---
 **Disclaimer:** This project is for educational and research purposes only. Unauthorized use in production or external environments is strictly prohibited.
-
