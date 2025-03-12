@@ -53,6 +53,20 @@ terraform apply --auto-approve
 ````
 
 ## Ansible 
+
+## SliverC2 Commands
+
+Sliver C2 is an open-source command and control (C2) framework developed by BishopFox. It is designed for adversary emulation, red teaming, and penetration testing. Sliver provides features similar to other C2 frameworks like Cobalt Strike and Metasploit, but it is particularly popular for its flexibility, modularity, and support for multiple operating systems.
+
+### **Key Features of Sliver C2:**
+- **Cross-platform Support:** Works on Windows, Linux, and macOS.
+- **Multiple Communication Channels:** Uses HTTP, HTTPS, DNS, and Mutual TLS (mTLS) for covert communication.
+- **Built-in Payload Generation:** Allows easy deployment of implants (beacons) in various formats.
+- **Multi-user Support:** Supports team-based operations.
+- **Dynamic Evasion Techniques:** Includes features to bypass endpoint detection and response (EDR) solutions.
+- **Extensibility:** Can be customized with Golang for additional functionalities.
+
+
 ---
 **Disclaimer:** This project is for educational and research purposes only. Unauthorized use in production or external environments is strictly prohibited.
 
