@@ -18,7 +18,6 @@ variable "region" {
   description = "OCI region"
 }
 
-
 variable "compartment" {
   type        = string
   description = "Compartment to test proof of concepts"
@@ -57,6 +56,11 @@ variable "route_table_cidr" {
 variable "source_id" {
   type        = string
   description = "Source id image of compute instance"
+}
+
+variable "secret_enable_auto_generation" {
+  enable_auto_generation = true
+  description            = "This will enable Terraform to automatically generate a secret" 
 }
 
 variable "pub_key" {}
