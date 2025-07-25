@@ -149,7 +149,7 @@ resource "oci_core_instance" "security_lab_instance" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo yum install python39 -y"
+      "sudo yum install python3.9 -y"
     ]
 
     connection {
@@ -162,7 +162,7 @@ resource "oci_core_instance" "security_lab_instance" {
 
   provisioner "local-exec" {
     working_dir = var.dir
-    command     = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i '${self.public_ip},'  -u opc --private-key '~/.ssh/oci_key' -e '~/.ssh/oci_key.pub' get_stager.yml -vvv"
+    command     = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i '${self.public_ip},'  -u opc --private-key '~/.ssh/oci_key' -e '~/.ssh/oci_key.pub' get_stager.yml -vvv --ask-become-pass"
   }
 
 }
