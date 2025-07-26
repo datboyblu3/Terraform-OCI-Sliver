@@ -17,7 +17,7 @@ resource "oci_kms_key" "sato_secret_key" {
 }
 
 # Define the secret 
-resource "oci_vault_secret" "my_example_secret" {
+resource "oci_vault_secret" "sato_secret" {
   compartment_id = var.compartment_ocid
   vault_id       = oci_kms_vault.my_kms_vault.id
   key_id         = oci_kms_key.my_secret_key.id
@@ -40,4 +40,10 @@ secret_rules {
   secret_version_expiry_interval = "P5D" # Expire in 5 days
  }
 
+}
+
+
+# Get secret from OCI Vault
+data "oci_secrets_secretbundle" "password_from_vault"{
+  secret_id = oci_vault_secret.sato_secret.id
 }

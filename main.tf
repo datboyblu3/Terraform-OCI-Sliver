@@ -1,3 +1,7 @@
+locals {
+    opc_new_password = base64decode(data.oci_secrets_secretbundle.password_from_vault.oci_secrets_secretbundle{0}.content)
+}
+
 resource "oci_core_vcn" "security_lab_vcn" {
   cidr_block     = var.vcn_cidr_block
   display_name   = "security-lab-vcn"
@@ -127,6 +131,9 @@ resource "oci_core_security_list" "security_lab_fw" {
 
 }
 
+ 
+
+
 resource "oci_core_instance" "security_lab_instance" {
   availability_domain = data.oci_identity_availability_domains.security_lab_ad.availability_domains[0].name
   compartment_id      = var.compartment
@@ -159,6 +166,8 @@ resource "oci_core_instance" "security_lab_instance" {
       private_key = file("~/.ssh/oci_key")
     }
   }
+
+ 
 
   provisioner "local-exec" {
     working_dir = var.dir
