@@ -1,4 +1,4 @@
-# SATO: Automated Sliver Beacon Deployment in OCI
+# SATO: Sliver Ansible Terrafrm OCI auto Deployment
 
 ## Overview
 This proof of concept (PoC) demonstrates the automation of red team infrastructure provisioning in Oracle Cloud Infrastructure (OCI) using Terraform and Ansible. The deployment facilitates the rapid creation of adversary-simulated environments by provisioning multiple compute instances and executing Sliver beacons.
