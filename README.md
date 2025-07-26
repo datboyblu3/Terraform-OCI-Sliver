@@ -19,7 +19,9 @@ The goal of this PoC is to provide red teams and penetration testers with an aut
 - [Sliver C2 Installed](https://sliver.sh/tutorials)
 - [Install Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 - [Install Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
-- Generate SSH keypair to access the OCI compute instances and resources:
+- SSH Key Pair:
+  
+Generate SSH keypair to access the OCI compute instances and resources:
 ```go
 ssh-keygen -t RSA -b 4096 -f ~/.ssh/oci_key
 ```
