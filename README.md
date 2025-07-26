@@ -1,7 +1,7 @@
 # SATO: Sliver Ansible Terrafrm OCI auto Deployment
 
 ## Overview
-This proof of concept (PoC) demonstrates the automation of red team infrastructure provisioning in Oracle Cloud Infrastructure (OCI) using Terraform and Ansible. The deployment facilitates the rapid creation of adversary-simulated environments by provisioning multiple compute instances and executing Sliver beacons.
+This proof of concept (PoC) demonstrates the automation of red team infrastructure provisioning in Oracle Cloud Infrastructure (OCI) using Terraform and Ansible. The deployment facilitates the rapid creation of adversary-simulated environments by provisioning multiple compute instances with automated Sliver beacons.
 
 ## Purpose
 The goal of this PoC is to provide red teams and penetration testers with an automated approach to deploying command and control (C2) infrastructure. By leveraging Infrastructure as Code (IaC) principles, this setup allows for:
