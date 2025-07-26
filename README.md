@@ -11,7 +11,8 @@ The goal of this PoC is to provide red teams and penetration testers with an aut
 - **Operational efficiency**, reducing the manual effort required to set up C2 infrastructure.
 - **CI/CD pipeline compromise**, enabling deeper attacks within trusted environments.
 
-<img width="1510" height="2218" alt="Drawing 2025-07-25 23 03 02 excalidraw" src="https://github.com/user-attachments/assets/1e265a9e-e82c-4cce-8133-846a0bfd6466" />
+<img width="1603" height="2329" alt="sato" src="https://github.com/user-attachments/assets/5491f839-9fe0-481e-a375-f75962e96df7" />
+
 
 ## Requirements
 - [OCI Account](https://signup.oraclecloud.com/)
