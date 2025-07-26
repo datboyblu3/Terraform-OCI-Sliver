@@ -11,28 +11,7 @@ The goal of this PoC is to provide red teams and penetration testers with an aut
 - **Operational efficiency**, reducing the manual effort required to set up C2 infrastructure.
 - **CI/CD pipeline compromise**, enabling deeper attacks within trusted environments.
 
-## OCI Shapes Overview
-
-Oracle OCI Compute Shapes define the hardware specifications for virtual machines and bare metal instances in Oracle Cloud Infrastructure (OCI). These shapes determine the number of CPUs, memory, network bandwidth, and storage configurations available for compute instances. 
-Go here for the official [OCI Compute Shape documentation](https://docs.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm#vm-standard).
-
-### **Types of OCI Compute Shapes:**
-1. **Standard Shapes** – General-purpose instances with balanced CPU and memory.
-2. **Dense I/O Shapes** – Optimized for high-performance workloads with local NVMe storage.
-3. **GPU Shapes** – Equipped with NVIDIA GPUs for machine learning and AI workloads.
-4. **High Performance Computing (HPC) Shapes** – Designed for computationally intensive tasks.
-5. **Optimized Shapes** – Customizable CPU and memory allocations for specific workloads.
-
-These shapes allow users to tailor their cloud infrastructure based on workload requirements, whether for general computing, high-speed storage, or AI-based processing. Below are some of the "standard" shapes used in OCI. These shapes will be the most cost effective.
-
-If you have purview into the workspace, build your beach head based off the image(s) used in the OCI environment.
-
-| Shape               | OCPU                | Memory (GB)            | Local Disk    | 
-| :---                |    :----:           |          ---:          | :---          |    
-| VM.Standard3        | 1 min, 32 max       | 1 GB min, 512 GB max   | Block Storage | 
-| VM.Standard.E4.Flex | 1 min, 64 max       | 1 GB min, 1024 GB max  | Block Storage |
-| VM.Standard.E5.Flex | 1 min, 94 max       | 1 GB min, 1049 GB max  | Block Storage |
-| VM.Standard.A1.Flex | 1 min, 78 max       | 1 GB min, 946 GB max   | Block Storage | 
+<img width="1510" height="2218" alt="Drawing 2025-07-25 23 03 02 excalidraw" src="https://github.com/user-attachments/assets/1e265a9e-e82c-4cce-8133-846a0bfd6466" />
 
 ## Requirements
 - [OCI Account](https://signup.oraclecloud.com/)
