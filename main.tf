@@ -42,7 +42,6 @@ secret_rules {
 
 }
 
-
 # Get secret from OCI Vault
 data "oci_secrets_secretbundle" "password_from_vault"{
   secret_id = oci_vault_secret.sato_secret.id
@@ -166,7 +165,6 @@ resource "oci_core_security_list" "security_lab_fw" {
   }
 
   #Allow outbound connections for sliver beacon callbacks
-
   egress_security_rules {
     protocol    = "17" # UDP
     destination = "0.0.0.0/0"
@@ -181,7 +179,6 @@ resource "oci_core_security_list" "security_lab_fw" {
   
 }
 
- 
 resource "oci_core_instance" "security_lab_instance" {
   availability_domain = data.oci_identity_availability_domains.security_lab_ad.availability_domains[0].name
   compartment_id      = var.compartment
@@ -227,7 +224,6 @@ resource "oci_core_instance" "security_lab_instance" {
       "echo 'opc password updated successfully!"
     ]
   }
-
 }
 
 data "oci_identity_availability_domains" "security_lab_ad" {
